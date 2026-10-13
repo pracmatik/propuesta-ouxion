@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" role="img" aria-label="Tabique de exposición · refuerzos de madera">
+  <rect width="640" height="480" fill="#eeebe6"/>
+  <rect x="0.5" y="0.5" width="639" height="479" fill="none" stroke="#d3cdc4"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M80 80 h480 v260 h-480 z" stroke="#c4beb4" stroke-width="1.4"/><path d="M80 80 v260" stroke="#9c958b" stroke-width="2"/><path d="M140 80 v260" stroke="#9c958b" stroke-width="2"/><path d="M200 80 v260" stroke="#9c958b" stroke-width="2"/><path d="M260 80 v260" stroke="#9c958b" stroke-width="2"/><path d="M320 80 v260" stroke="#9c958b" stroke-width="2"/><path d="M380 80 v260" stroke="#9c958b" stroke-width="2"/><path d="M440 80 v260" stroke="#9c958b" stroke-width="2"/><path d="M500 80 v260" stroke="#9c958b" stroke-width="2"/><path d="M560 80 v260" stroke="#9c958b" stroke-width="2"/><rect x="80" y="150" width="480" height="16" stroke="#A18148" stroke-width="2"/><rect x="80" y="230" width="480" height="16" stroke="#A18148" stroke-width="2"/></g>
+  <text x="40" y="420" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#6f6a63">Tabique de exposición · refuerzos de madera</text>
+  <text x="40" y="446" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#a39d94" letter-spacing="1.8">FOTO DE LA VISITA · MUESTRA</text>
+  <text x="600" y="446" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#a39d94" letter-spacing="1.2">06</text>
+</svg>

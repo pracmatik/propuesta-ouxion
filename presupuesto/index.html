@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Presupuesto de muestra · NORDA Vía Augusta Plaza</title>
+<script src="../track.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ocre:#A18148;--ocre2:#C7B299;--txt:#707070;--tit:#333333;--negro:#141215;--bg:#F7F7F7;--w:#fff;
+  --line:#e6e3de;--line2:#d9d4cc;--soft:#faf8f5;--ambar:#b7791f;--ambar-bg:#fdf5e6;--ambar-line:#e8c27a;}
+*{box-sizing:border-box;}
+html{-webkit-text-size-adjust:100%;}
+body{margin:0;background:var(--bg);color:var(--tit);font-family:'Montserrat',system-ui,-apple-system,'Segoe UI',sans-serif;
+  font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.c-r,.tnum{font-variant-numeric:tabular-nums;}
+
+/* ── Cabecera ── */
+.top{max-width:1320px;margin:0 auto;padding:28px 24px 18px;display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.top-l{display:flex;align-items:center;gap:18px;}
+.top-l img{height:56px;width:auto;display:block;}
+.top-k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ocre);font-weight:600;}
+.top-t{font-size:15px;color:var(--tit);font-weight:600;margin-top:2px;}
+.top-r{font-size:12px;color:var(--txt);text-align:right;}
+
+/* ── Barra de control (zona y beneficio) ── */
+.ctrl{position:sticky;top:0;z-index:20;background:rgba(247,247,247,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.ctrl-in{max-width:1320px;margin:0 auto;padding:14px 24px;display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;}
+.ctrl label{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt);font-weight:600;margin-bottom:6px;}
+.ctrl select{font:600 14px 'Montserrat',sans-serif;color:var(--tit);background:var(--w);border:1px solid var(--line2);border-radius:8px;
+  padding:9px 36px 9px 12px;appearance:none;-webkit-appearance:none;min-width:200px;cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,var(--ocre) 50%),linear-gradient(135deg,var(--ocre) 50%,transparent 50%);
+  background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat;}
+.ctrl select:focus-visible,.ctrl input:focus-visible{outline:2px solid var(--ocre);outline-offset:2px;}
+.ben{display:flex;align-items:center;gap:12px;}
+.ben input[type=range]{width:180px;accent-color:var(--ocre);}
+.ben output{font-weight:700;font-size:16px;color:var(--tit);min-width:48px;}
+.ctrl-nota{font-size:12px;color:var(--txt);line-height:1.45;max-width:260px;}
+.ctrl-nota b,.nota-movil b{color:var(--ocre);font-weight:600;}
+.nota-movil{display:none;}
+.ctrl-total{margin-left:auto;text-align:right;}
+.ctrl-total .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--txt);font-weight:600;}
+.ctrl-total .v{font-size:24px;font-weight:700;color:var(--negro);line-height:1.2;transition:color .3s;}
+.ctrl-total .v.flash{color:var(--ocre);}
+.ctrl-total .s{font-size:11.5px;color:var(--ambar);font-weight:500;}
+
+/* ── Rejilla: documento + lateral ── */
+.grid{max-width:1320px;margin:0 auto;padding:28px 24px 64px;display:grid;grid-template-columns:minmax(0,1fr) 330px;
+  grid-template-areas:"doc side";gap:28px;align-items:start;}
+.doc{grid-area:doc;background:var(--w);border:1px solid var(--line);border-radius:4px;}
+.side{grid-area:side;position:sticky;top:96px;display:flex;flex-direction:column;gap:18px;}
+
+/* ── Lateral: lo que entró y el tiempo ── */
+.card{background:var(--w);border:1px solid var(--line);border-radius:4px;padding:20px 20px 18px;}
+.card-k{font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ocre);font-weight:600;margin-bottom:10px;}
+.card p{margin:0 0 10px;font-size:12.5px;color:var(--txt);line-height:1.55;}
+.xls{border:1px solid #cfd5cf;border-radius:3px;overflow:hidden;font-size:11px;background:#fff;}
+.xls-bar{background:#1f6e43;color:#fff;font-size:11px;padding:6px 9px;font-weight:500;display:flex;justify-content:space-between;gap:8px;}
+.xls-bar span:last-child{opacity:.75;}
+.xls table{border-collapse:collapse;width:100%;table-layout:fixed;}
+.xls th{background:#eef1ee;color:#6b746d;font-weight:500;font-size:10px;border:1px solid #dde2dd;padding:2px 4px;text-align:center;}
+.xls td{border:1px solid #e7ebe7;padding:3px 5px;color:#333;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.xls td.rn{background:#eef1ee;color:#6b746d;text-align:center;font-size:10px;width:24px;}
+.xls td.num{text-align:right;font-variant-numeric:tabular-nums;}
+.xls-more{font-size:11px;color:var(--txt);padding:6px 8px;background:#f6f7f6;border-top:1px solid #e7ebe7;}
+.tl{list-style:none;margin:4px 0 0;padding:0;}
+.tl li{display:grid;grid-template-columns:46px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--txt);line-height:1.45;}
+.tl li:first-child{border-top:none;padding-top:2px;}
+.tl .h{font-weight:700;color:var(--tit);font-variant-numeric:tabular-nums;}
+.tl b{color:var(--tit);font-weight:600;}
+.tl .pend .h{color:var(--ambar);}
+.tl .pend b{color:var(--ambar);}
+.tl .sign .h{color:var(--ocre);}
+.big{display:flex;align-items:baseline;gap:10px;margin:2px 0 6px;}
+.big .n{font-size:40px;font-weight:700;color:var(--negro);line-height:1;}
+.big .u{font-size:13px;color:var(--txt);}
+
+/* ── Documento ── */
+.doc-head{padding:34px 40px 28px;border-bottom:2px solid var(--negro);display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;}
+.doc-k{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ocre);font-weight:600;}
+.doc h1{margin:8px 0 6px;font-size:26px;line-height:1.25;font-weight:700;color:var(--negro);letter-spacing:-.01em;}
+.doc-dir{font-size:13.5px;color:var(--txt);}
+.estado{display:inline-block;margin-top:14px;font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--ocre);
+  border:1px solid var(--ocre2);border-radius:999px;padding:4px 12px;}
+.doc-ref{font-size:12px;color:var(--tit);min-width:250px;}
+.doc-ref div{display:flex;justify-content:space-between;gap:16px;padding:4px 0;border-bottom:1px solid var(--line);}
+.doc-ref span{color:var(--txt);}
+.cond{padding:12px 40px;background:var(--soft);border-bottom:1px solid var(--line);font-size:12px;color:var(--txt);}
+.cond b{color:var(--tit);font-weight:600;}
+
+.tabla{width:100%;border-collapse:collapse;font-size:12.5px;}
+.tabla thead th{text-align:left;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--txt);font-weight:600;
+  padding:12px 12px;border-bottom:1px solid var(--line2);white-space:nowrap;background:var(--w);}
+.tabla th:first-child,.tabla td:first-child{padding-left:40px;}
+.tabla th:last-child,.tabla td:last-child{padding-right:40px;}
+.c-n{width:64px;color:var(--txt);font-variant-numeric:tabular-nums;}
+.c-ud{width:44px;color:var(--txt);}
+.c-r{text-align:right!important;white-space:nowrap;}
+.c-imp{font-weight:600;color:var(--negro);}
+.c-base{color:var(--txt);}
+.ud-m{display:none;}
+.cap-head td{padding:26px 12px 10px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--negro);
+  border-bottom:1px solid var(--negro);}
+.cap-n{display:inline-block;min-width:34px;color:var(--ocre);}
+.p-row td{padding:13px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+.c-desc{color:#4b4b4b;line-height:1.55;}
+.p-nota{margin-top:8px;padding:8px 12px;background:var(--soft);border-left:2px solid var(--ocre2);font-size:11.5px;color:var(--txt);line-height:1.5;}
+.p-nota b{font-weight:700;color:var(--ocre);text-transform:uppercase;font-size:9.5px;letter-spacing:.1em;margin-right:4px;}
+.p-pend td{background:var(--ambar-bg);}
+.p-pend .c-imp{color:var(--ambar);}
+.p-nota-pend{background:#fff;border-left-color:var(--ambar);color:#7a5413;}
+.p-nota-pend b{color:var(--ambar);}
+.pend-tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ambar);
+  border:1px solid var(--ambar-line);border-radius:999px;padding:1px 8px;background:#fff;}
+.cap-sub td{padding:11px 12px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--soft);border-bottom:1px solid var(--line);color:var(--txt);}
+.cap-sub td:last-child{font-size:13px;color:var(--negro);font-weight:700;letter-spacing:0;}
+.v-upd{transition:background-color .6s;}
+.v-upd.flash{background-color:rgba(199,178,153,.45);border-radius:3px;}
+
+.cierre{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;padding:34px 40px 30px;border-top:1px solid var(--line);}
+.resumen{border-collapse:collapse;font-size:12.5px;width:100%;}
+.resumen td{padding:8px 0;border-bottom:1px solid var(--line);color:var(--tit);}
+.resumen .h td{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--txt);font-weight:600;border-bottom:1px solid var(--negro);}
+.resumen .sep td{padding-top:14px;color:var(--txt);}
+.resumen .t td{font-size:18px;font-weight:700;color:var(--negro);border-bottom:none;padding-top:14px;}
+.resumen .pend td{color:var(--ambar);font-size:12px;border-bottom:none;padding-top:2px;}
+.cierre-nota{font-size:12px;color:var(--txt);line-height:1.65;}
+.cierre-nota p{margin:0 0 10px;}
+.cierre-nota b{color:var(--tit);font-weight:600;}
+.firmas{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:10px 40px 36px;}
+.firma{border-top:1px solid var(--line2);padding-top:10px;font-size:11.5px;color:var(--txt);margin-top:46px;}
+.firma b{display:block;color:var(--tit);font-weight:600;font-size:12.5px;}
+.pie{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 40px;border-top:1px solid var(--line);
+  font-size:11px;color:#9a9a9a;}
+.pk{font-weight:700;color:#5a5653;letter-spacing:-.01em;font-size:12px;}
+.pk i{font-style:normal;color:#b7791f;}
+
+.acciones{max-width:1320px;margin:-36px auto 48px;padding:0 24px;font-size:13px;color:var(--txt);}
+.acciones a{color:var(--ocre);font-weight:600;text-decoration:none;}
+.acciones a:hover{text-decoration:underline;}
+
+/* ── Tablet: el lateral pasa arriba ── */
+@media (max-width:1080px){
+  .grid{grid-template-columns:1fr;grid-template-areas:"side" "doc";}
+  .side{position:static;display:grid;grid-template-columns:1fr 1fr;}
+}
+/* ── Móvil ── */
+@media (max-width:720px){
+  body{font-size:13.5px;}
+  .top{padding:18px 16px 14px;}
+  .top-l img{height:44px;}
+  .top-r{display:none;}
+  .ctrl-in{padding:10px 16px 12px;gap:10px 16px;align-items:center;}
+  .ctrl label{font-size:9.5px;margin-bottom:3px;}
+  .ctrl select{min-width:0;width:100%;font-size:13px;padding:7px 30px 7px 10px;}
+  .ctrl-zona{flex:1 1 150px;}
+  .ben input[type=range]{width:100%;}
+  .ctrl-ben{flex:1 1 150px;}
+  .ben{gap:8px;}
+  .ben output{font-size:14px;min-width:40px;}
+  .ctrl-nota{display:none;}
+  .nota-movil{display:block;margin:0;padding:0 16px 12px;font-size:12px;color:var(--txt);line-height:1.5;}
+  .ctrl-total{margin-left:0;flex-basis:100%;text-align:left;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+    border-top:1px solid var(--line);padding-top:8px;}
+  .ctrl-total .v{font-size:19px;}
+  .grid{padding:16px 16px 48px;gap:16px;}
+  .side{grid-template-columns:1fr;gap:12px;}
+  .card{padding:16px;}
+  .doc-head{padding:22px 16px 18px;gap:16px;}
+  .doc h1{font-size:20px;}
+  .doc-ref{min-width:0;width:100%;}
+  .cond{padding:10px 16px;}
+  .tabla thead{display:none;}
+  .tabla,.tabla tbody,.tabla tr,.tabla td{display:block;width:100%;}
+  .tabla td:first-child,.tabla td:last-child{padding-left:16px;padding-right:16px;}
+  .cap-head td{padding:22px 16px 8px;}
+  .p-row{display:grid!important;grid-template-columns:auto 1fr auto;column-gap:10px;padding:14px 16px;border-bottom:1px solid var(--line);}
+  .p-row td{display:block;padding:0!important;border:none;width:auto!important;background:none!important;}
+  .p-pend{background:var(--ambar-bg);}
+  .p-row .c-n{grid-column:1;grid-row:1;}
+  .p-row .c-desc{grid-column:2 / 4;grid-row:1;}
+  .p-row .c-ud{display:none;}
+  .p-row .c-r{grid-column:2;font-size:12px;color:var(--txt);text-align:left!important;display:flex;justify-content:space-between;
+    border-top:1px dashed var(--line)!important;padding-top:5px!important;margin-top:5px;}
+  .p-row .c-r::before{content:attr(data-l);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#9a9a9a;}
+  .p-row .c-r + .c-r{margin-top:0;border-top:none!important;padding-top:2px!important;}
+  .ud-m{display:inline!important;}
+  .p-row .c-imp{grid-column:2 / 4;font-size:14px;color:var(--negro);}
+  .p-row .c-imp::before{color:var(--tit);font-weight:600;}
+  .cap-sub{display:flex!important;justify-content:space-between;padding:10px 16px;background:var(--soft);}
+  .cap-sub td{padding:0!important;width:auto!important;background:none;border:none;}
+  .cierre{grid-template-columns:1fr;padding:24px 16px;gap:24px;}
+  .firmas{grid-template-columns:1fr;gap:0;padding:0 16px 24px;}
+  .firma{margin-top:36px;}
+  .pie{padding:14px 16px;}
+  .acciones{margin-top:-24px;padding:0 16px;}
+}
+/* ── Impresión: solo el documento ── */
+@media print{
+  @page{size:A4;margin:14mm 12mm 16mm;}
+  body{background:#fff;font-size:11px;}
+  .ctrl,.side,.acciones,.top-r,.nota-movil{display:none!important;}
+  .top{padding:0 0 10px;max-width:none;}
+  .top-l img{height:40px;}
+  .grid{display:block;padding:0;max-width:none;}
+  .doc{border:none;border-radius:0;}
+  .doc-head{padding:14px 0 16px;}
+  .cond{padding:8px 0;background:none;}
+  .tabla th:first-child,.tabla td:first-child{padding-left:0;}
+  .tabla th:last-child,.tabla td:last-child{padding-right:0;}
+  .tabla thead{display:table-header-group;}
+  .tabla{table-layout:fixed;font-size:9.5px;}
+  .tabla thead th{white-space:normal;font-size:8px;padding:8px 5px;letter-spacing:.06em;vertical-align:bottom;}
+  .tabla th.c-n,.tabla td.c-n{width:30px;}
+  .tabla th.c-ud,.tabla td.c-ud{width:28px;}
+  .tabla th.c-r{width:62px;}
+  .tabla th.c-r:last-child{width:70px;}
+  .p-row td{padding:7px 5px;}
+  .c-r{white-space:nowrap;}
+  .p-nota{font-size:9px;padding:5px 8px;margin-top:5px;}
+  .pend-tag{font-size:7.5px;padding:0 5px;}
+  .cap-head td{padding:16px 5px 6px;font-size:10px;}
+  .cap-sub td{padding:7px 5px;}
+  .p-row{break-inside:avoid;}
+  .cap-head{break-after:avoid;}
+  .cierre,.firmas{break-inside:avoid;padding-left:0;padding-right:0;}
+  .pie{padding:12px 0;}
+  .p-pend td,.p-nota,.cap-sub td{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-l">
+    <img src="../assets/ouxion-logo.png" alt="Ouxion" width="39" height="56">
+    <div>
+      <div class="top-k">Presupuesto para revisar</div>
+      <div class="top-t">Tienda NORDA · Vía Augusta Plaza, local B-14</div>
+    </div>
+  </div>
+  <div class="top-r">Muestra para Ouxion · marca, obra y precios inventados</div>
+</header>
+
+<p class="nota-movil"><b>Coeficientes de ejemplo.</b> Los pone Ouxion. Cambia la zona o el beneficio y se recalcula todo el presupuesto.</p>
+
+<div class="ctrl" role="region" aria-label="Zona y beneficio">
+  <div class="ctrl-in">
+    <div class="ctrl-zona">
+      <label for="zona">Zona de la obra</label>
+      <select id="zona" data-track="presupuesto-zona"><option value="1" selected>Barcelona · 1,00</option><option value="1.03">Girona · 1,03</option><option value="1.02">Tarragona · 1,02</option><option value="1.08">Madrid · 1,08</option><option value="0.98">Valencia · 0,98</option><option value="1.04">Málaga · 1,04</option><option value="1.15">Baleares · 1,15</option><option value="1.06">Lisboa · 1,06</option><option value="1.07">País Vasco · 1,07</option></select>
+    </div>
+    <div class="ctrl-ben">
+      <label for="ben">Beneficio</label>
+      <div class="ben"><input id="ben" type="range" min="0" max="35" step="1" value="15" data-track="presupuesto-beneficio"><output id="ben-o" for="ben">15 %</output></div>
+    </div>
+    <div class="ctrl-nota"><b>Coeficientes de ejemplo.</b> Los pone Ouxion. Cambia la zona o el beneficio y se recalcula todo el presupuesto.</div>
+    <div class="ctrl-total">
+      <div class="k">Total sin IVA</div>
+      <div class="v tnum" id="tot-bar">106.341,36 €</div>
+      <div class="s">Faltan 2 partidas sin precio</div>
+    </div>
+  </div>
+</div>
+
+<main class="grid">
+
+  <aside class="side">
+    <section class="card" data-section="presupuesto-entrada">
+      <div class="card-k">Lo que entró</div>
+      <p>La medición de la obra, en Excel, tal como llegó por correo. También vale PDF, escaneado, BC3 o Word.</p>
+      <div class="xls" aria-label="Extracto de la medición en Excel">
+        <div class="xls-bar"><span>Medicion_NORDA_B14.xlsx</span><span>Hoja 1</span></div>
+        <table>
+          <colgroup><col style="width:24px"><col style="width:40px"><col><col style="width:28px"><col style="width:52px"></colgroup>
+          <thead><tr><th></th><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+          <tbody>
+            <tr><td class="rn">1</td><td><b>Cód.</b></td><td><b>Partida</b></td><td><b>Ud</b></td><td class="num"><b>Med.</b></td></tr>
+            <tr><td class="rn">2</td><td>1.1</td><td title="Cierre provisional de obra hacia el pasillo del centro comercial con tablero hidrófugo">Cierre provisional de obra hacia el pasillo del centro comercial con tablero hidrófugo</td><td>ml</td><td class="num">22,40</td></tr><tr><td class="rn">3</td><td>1.2</td><td title="Desmontaje de falso techo existente">Desmontaje de falso techo existente</td><td>m²</td><td class="num">420,00</td></tr><tr><td class="rn">4</td><td>1.3</td><td title="Demolición de tabiquería de placa de yeso del inquilino anterior">Demolición de tabiquería de placa de yeso del inquilino anterior</td><td>m²</td><td class="num">96,50</td></tr><tr><td class="rn">5</td><td>2.1</td><td title="Tabique de placa de yeso 15+15 / 70 / 15+15 con lana mineral">Tabique de placa de yeso 15+15 / 70 / 15+15 con lana mineral</td><td>m²</td><td class="num">64,80</td></tr><tr><td class="rn">6</td><td>2.2</td><td title="Tabiquería de probadores en placa de yeso 13+13 / 48 / 13+13 hasta falso techo">Tabiquería de probadores en placa de yeso 13+13 / 48 / 13+13 hasta falso techo</td><td>m²</td><td class="num">58,20</td></tr><tr><td class="rn">7</td><td>2.3</td><td title="Trasdosado autoportante en paredes de exposición">Trasdosado autoportante en paredes de exposición</td><td>m²</td><td class="num">112,40</td></tr><tr><td class="rn">8</td><td>2.4</td><td title="Falso techo continuo de placa de yeso en área de venta">Falso techo continuo de placa de yeso en área de venta</td><td>m²</td><td class="num">318,00</td></tr><tr><td class="rn">9</td><td>3.1</td><td title="Cuadro general de baja tensión con protecciones y subcuadro de almacén">Cuadro general de baja tensión con protecciones y subcuadro de almacén</td><td>ud</td><td class="num">1</td></tr><tr><td class="rn">10</td><td>3.2</td><td title="Línea independiente de escaparate con reloj astronómico y contactor">Línea independiente de escaparate con reloj astronómico y contactor</td><td>ud</td><td class="num">1</td></tr>
+          </tbody>
+        </table>
+        <div class="xls-more">… y 18 líneas más · 27 partidas en total</div>
+      </div>
+    </section>
+
+    <section class="card" data-section="presupuesto-tiempo">
+      <div class="card-k">El tiempo</div>
+      <div class="big"><span class="n tnum">4</span><span class="u">minutos de la medición al borrador</span></div>
+      <ul class="tl">
+        <li><span class="h">9:02</span><span><b>Medición recibida.</b> 27 partidas en 9 capítulos.</span></li>
+        <li><span class="h">9:06</span><span><b>Presupuesto listo para revisar.</b> 25 partidas con precio de vuestra base, 2 marcadas sin precio.</span></li>
+        <li class="pend"><span class="h">9:14</span><span><b>Precio pedido a Vidres Badia</b> para las 2 partidas del escaparate. Pendiente de respuesta.</span></li>
+        <li class="sign"><span class="h">Falta</span><span><b>Revisión y firma</b> de una persona de Ouxion. Nada sale sin eso.</span></li>
+      </ul>
+      <p style="margin:12px 0 0;font-size:11.5px;">El pedido de precio al industrial se monta a medida para Ouxion.</p>
+    </section>
+  </aside>
+
+  <article class="doc" data-section="presupuesto-documento">
+    <div class="doc-head">
+      <div>
+        <div class="doc-k">Presupuesto</div>
+        <h1>Implantación de tienda NORDA</h1>
+        <div class="doc-dir">Centro Comercial Vía Augusta Plaza, local B-14 · Barcelona · 420 m²</div>
+        <div class="estado">Borrador para revisar · pendiente de firma</div>
+      </div>
+      <div class="doc-ref">
+        <div><span>Referencia</span> OUX-P-2026-118</div>
+        <div><span>Fecha</span> 13/10/2026</div>
+        <div><span>Cliente</span> NORDA</div>
+        <div><span>Plazo de obra</span> 6 semanas</div>
+        <div><span>Apertura</span> 20/11/2026</div>
+        <div><span>Validez</span> 30 días</div>
+      </div>
+    </div>
+    <div class="cond">Aplicado: zona <b id="cond-zona">Barcelona</b>, coeficiente <b id="cond-coef">1,00</b> · beneficio <b id="cond-ben">15 %</b> sobre el precio base de vuestra base de precios.</div>
+
+    <table class="tabla">
+      <thead><tr>
+        <th class="c-n">Núm.</th><th>Descripción</th><th class="c-ud">Ud.</th><th class="c-r">Medición</th>
+        <th class="c-r">Precio base</th><th class="c-r">Precio aplicado</th><th class="c-r">Importe €</th>
+      </tr></thead>
+      <tbody class="cap" data-cap="1">
+    <tr class="cap-head"><td colspan="7"><span class="cap-n">01</span>Trabajos previos y demoliciones</td></tr>
+    <tr class="p-row" data-med="22.4" data-pu="38.5">
+      <td class="c-n">1.1</td>
+      <td class="c-desc"><span class="d-txt">Cierre provisional de obra hacia el pasillo del centro comercial con tablero hidrófugo de 3 m de altura, puerta de acceso con cerradura y protección del pavimento del pasillo.</span><div class="p-nota"><b>Nota</b> La impresión del vinilo de obra con la imagen de la marca corre a cargo de NORDA.</div></td>
+      <td class="c-ud">ml</td>
+      <td class="c-r" data-l="Medición"><span>22,40<span class="ud-m"> ml</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">38,50</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>44,28</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>991,87</span></td>
+    </tr><tr class="p-row" data-med="420" data-pu="6.2">
+      <td class="c-n">1.2</td>
+      <td class="c-desc"><span class="d-txt">Desmontaje de falso techo existente, incluidas luminarias y rejillas, con retirada a contenedor.</span></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>420,00<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">6,20</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>7,13</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>2.994,60</span></td>
+    </tr><tr class="p-row" data-med="96.5" data-pu="9.8">
+      <td class="c-n">1.3</td>
+      <td class="c-desc"><span class="d-txt">Demolición de tabiquería de placa de yeso del inquilino anterior, con carga y retirada de escombros fuera del horario comercial.</span><div class="p-nota"><b>Nota</b> Retirada de residuos por el muelle del centro y en el horario que fijen sus normas.</div></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>96,50<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">9,80</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>11,27</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>1.087,56</span></td>
+    </tr>
+    <tr class="cap-sub"><td colspan="6">Subtotal capítulo 1</td><td class="c-r"><span data-sub="1">5.074,03</span></td></tr>
+  </tbody><tbody class="cap" data-cap="2">
+    <tr class="cap-head"><td colspan="7"><span class="cap-n">02</span>Tabiquería y techos</td></tr>
+    <tr class="p-row" data-med="64.8" data-pu="42.6">
+      <td class="c-n">2.1</td>
+      <td class="c-desc"><span class="d-txt">Tabique de placa de yeso 15+15 / 70 / 15+15 con lana mineral, de separación entre área de venta y almacén.</span></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>64,80<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">42,60</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>48,99</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>3.174,55</span></td>
+    </tr><tr class="p-row" data-med="58.2" data-pu="36.9">
+      <td class="c-n">2.2</td>
+      <td class="c-desc"><span class="d-txt">Tabiquería de probadores en placa de yeso 13+13 / 48 / 13+13 hasta falso techo, con refuerzos para espejos y perchas.</span><div class="p-nota"><b>Nota</b> Refuerzos de madera situados según el plano de probadores de la marca.</div></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>58,20<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">36,90</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>42,43</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>2.469,43</span></td>
+    </tr><tr class="p-row" data-med="112.4" data-pu="31.5">
+      <td class="c-n">2.3</td>
+      <td class="c-desc"><span class="d-txt">Trasdosado autoportante en paredes de exposición, con refuerzos de madera para el anclaje del mobiliario mural.</span></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>112,40<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">31,50</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>36,22</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>4.071,13</span></td>
+    </tr><tr class="p-row" data-med="318" data-pu="29.8">
+      <td class="c-n">2.4</td>
+      <td class="c-desc"><span class="d-txt">Falso techo continuo de placa de yeso en área de venta, con foseados perimetrales para iluminación y registros.</span></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>318,00<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">29,80</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>34,27</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>10.897,86</span></td>
+    </tr>
+    <tr class="cap-sub"><td colspan="6">Subtotal capítulo 2</td><td class="c-r"><span data-sub="2">20.612,97</span></td></tr>
+  </tbody><tbody class="cap" data-cap="3">
+    <tr class="cap-head"><td colspan="7"><span class="cap-n">03</span>Electricidad e iluminación</td></tr>
+    <tr class="p-row" data-med="1" data-pu="2680">
+      <td class="c-n">3.1</td>
+      <td class="c-desc"><span class="d-txt">Cuadro general de baja tensión con protecciones y subcuadro de almacén, según potencia contratada al centro comercial.</span><div class="p-nota"><b>Nota</b> La legalización de la instalación va en el capítulo 9.</div></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>1<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">2.680,00</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>3.082,00</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>3.082,00</span></td>
+    </tr><tr class="p-row" data-med="1" data-pu="640">
+      <td class="c-n">3.2</td>
+      <td class="c-desc"><span class="d-txt">Línea independiente de escaparate con reloj astronómico y contactor, según normas técnicas del centro comercial.</span></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>1<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">640,00</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>736,00</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>736,00</span></td>
+    </tr><tr class="p-row" data-med="86" data-pu="38.5">
+      <td class="c-n">3.3</td>
+      <td class="c-desc"><span class="d-txt">Punto de luz en falso techo con cableado libre de halógenos y mecanismo.</span></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>86<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">38,50</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>44,28</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>3.808,08</span></td>
+    </tr><tr class="p-row" data-med="54" data-pu="46.2">
+      <td class="c-n">3.4</td>
+      <td class="c-desc"><span class="d-txt">Carril electrificado trifásico empotrado en foseado de techo.</span></td>
+      <td class="c-ud">ml</td>
+      <td class="c-r" data-l="Medición"><span>54,00<span class="ud-m"> ml</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">46,20</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>53,13</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>2.869,02</span></td>
+    </tr><tr class="p-row" data-med="64" data-pu="118">
+      <td class="c-n">3.5</td>
+      <td class="c-desc"><span class="d-txt">Proyector LED de 30 W para carril, 3.000 K, índice de reproducción cromática superior a 90.</span><div class="p-nota"><b>Nota</b> Modelo y temperatura de color según manual de la marca.</div></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>64<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">118,00</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>135,70</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>8.684,80</span></td>
+    </tr><tr class="p-row" data-med="38" data-pu="42">
+      <td class="c-n">3.6</td>
+      <td class="c-desc"><span class="d-txt">Tomas de corriente y de datos en caja, probadores y almacén.</span></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>38<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">42,00</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>48,30</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>1.835,40</span></td>
+    </tr><tr class="p-row" data-med="18" data-pu="64.5">
+      <td class="c-n">3.7</td>
+      <td class="c-desc"><span class="d-txt">Alumbrado de emergencia y señalización de evacuación.</span></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>18<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">64,50</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>74,18</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>1.335,24</span></td>
+    </tr>
+    <tr class="cap-sub"><td colspan="6">Subtotal capítulo 3</td><td class="c-r"><span data-sub="3">22.350,54</span></td></tr>
+  </tbody><tbody class="cap" data-cap="4">
+    <tr class="cap-head"><td colspan="7"><span class="cap-n">04</span>Climatización</td></tr>
+    <tr class="p-row" data-med="2" data-pu="3450">
+      <td class="c-n">4.1</td>
+      <td class="c-desc"><span class="d-txt">Fancoil de conductos conectado al anillo de agua del centro comercial, con valvulería, termostato y conexión a su sistema de control.</span></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>2<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">3.450,00</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>3.967,50</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>7.935,00</span></td>
+    </tr><tr class="p-row" data-med="96" data-pu="48">
+      <td class="c-n">4.2</td>
+      <td class="c-desc"><span class="d-txt">Red de conductos de impulsión y retorno en chapa aislada, con difusores lineales y rejillas.</span><div class="p-nota"><b>Nota</b> Trazado coordinado con el falso techo. Si aparecen interferencias en obra, el desvío se valora aparte.</div></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>96,00<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">48,00</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>55,20</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>5.299,20</span></td>
+    </tr><tr class="p-row" data-med="1" data-pu="580">
+      <td class="c-n">4.3</td>
+      <td class="c-desc"><span class="d-txt">Pruebas, equilibrado y puesta en marcha, con certificado de la instalación.</span></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>1<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">580,00</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>667,00</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>667,00</span></td>
+    </tr>
+    <tr class="cap-sub"><td colspan="6">Subtotal capítulo 4</td><td class="c-r"><span data-sub="4">13.901,20</span></td></tr>
+  </tbody><tbody class="cap" data-cap="5">
+    <tr class="cap-head"><td colspan="7"><span class="cap-n">05</span>Pavimentos</td></tr>
+    <tr class="p-row" data-med="346" data-pu="12.8">
+      <td class="c-n">5.1</td>
+      <td class="c-desc"><span class="d-txt">Autonivelante cementoso de 5 mm de espesor medio en área de venta.</span></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>346,00<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">12,80</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>14,72</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>5.093,12</span></td>
+    </tr><tr class="p-row" data-med="346" data-pu="54.6">
+      <td class="c-n">5.2</td>
+      <td class="c-desc"><span class="d-txt">Pavimento porcelánico rectificado de 60 × 120 cm recibido con cemento cola, con junta de 2 mm.</span><div class="p-nota"><b>Nota</b> Material elegido por la marca. Se valora con el precio de la muestra que debe aprobar la marca.</div></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>346,00<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">54,60</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>62,79</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>21.725,34</span></td>
+    </tr>
+    <tr class="cap-sub"><td colspan="6">Subtotal capítulo 5</td><td class="c-r"><span data-sub="5">26.818,46</span></td></tr>
+  </tbody><tbody class="cap" data-cap="6">
+    <tr class="cap-head"><td colspan="7"><span class="cap-n">06</span>Pintura</td></tr>
+    <tr class="p-row" data-med="742" data-pu="7.9">
+      <td class="c-n">6.1</td>
+      <td class="c-desc"><span class="d-txt">Pintura plástica lisa mate en paredes y techos, dos manos sobre imprimación, color según manual de la marca.</span></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>742,00<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">7,90</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>9,08</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>6.737,36</span></td>
+    </tr>
+    <tr class="cap-sub"><td colspan="6">Subtotal capítulo 6</td><td class="c-r"><span data-sub="6">6.737,36</span></td></tr>
+  </tbody><tbody class="cap" data-cap="7">
+    <tr class="cap-head"><td colspan="7"><span class="cap-n">07</span>Escaparate y fachada al centro</td></tr>
+    <tr class="p-row p-pend" data-med="18.6" data-pu="">
+      <td class="c-n">7.1</td>
+      <td class="c-desc"><span class="d-txt">Vidrio laminado extraclaro 10+10 con canto pulido para escaparate, colocado sobre perfil oculto.</span><div class="p-nota p-nota-pend"><b>Pedido al industrial</b> No hay precio en vuestra base. Precio pedido a Vidres Badia el 13/10 a las 9:14, pendiente de respuesta. No entra en el total hasta que llegue y lo reviséis.</div></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>18,60<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base"><span class="pend-tag">Sin precio</span></td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa></span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>Pendiente</span></td>
+    </tr><tr class="p-row p-pend" data-med="1" data-pu="">
+      <td class="c-n">7.2</td>
+      <td class="c-desc"><span class="d-txt">Puerta automática de vidrio templado de doble hoja en el acceso desde el pasillo.</span><div class="p-nota p-nota-pend"><b>Pedido al industrial</b> No hay precio en vuestra base. Precio pedido a Vidres Badia el 13/10 a las 9:14, pendiente de respuesta. No entra en el total hasta que llegue y lo reviséis.</div></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>1<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base"><span class="pend-tag">Sin precio</span></td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa></span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>Pendiente</span></td>
+    </tr><tr class="p-row" data-med="1" data-pu="1240">
+      <td class="c-n">7.3</td>
+      <td class="c-desc"><span class="d-txt">Estructura metálica para el soporte del rótulo de fachada.</span><div class="p-nota"><b>Nota</b> El rótulo lo pone la marca. Se valora solo la estructura. Requiere permiso de trabajos en caliente del centro.</div></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>1<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">1.240,00</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>1.426,00</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>1.426,00</span></td>
+    </tr>
+    <tr class="cap-sub"><td colspan="6">Subtotal capítulo 7</td><td class="c-r"><span data-sub="7">1.426,00</span></td></tr>
+  </tbody><tbody class="cap" data-cap="8">
+    <tr class="cap-head"><td colspan="7"><span class="cap-n">08</span>Mobiliario y montaje</td></tr>
+    <tr class="p-row" data-med="64" data-pu="32">
+      <td class="c-n">8.1</td>
+      <td class="c-desc"><span class="d-txt">Ayudas al montaje del mobiliario de la marca: descarga en muelle, traslado, ubicación y nivelación.</span><div class="p-nota"><b>Nota</b> El mobiliario lo suministra la marca y no está incluido en este presupuesto. Solo se valoran las ayudas de montaje.</div></td>
+      <td class="c-ud">h</td>
+      <td class="c-r" data-l="Medición"><span>64<span class="ud-m"> h</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">32,00</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>36,80</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>2.355,20</span></td>
+    </tr><tr class="p-row" data-med="1" data-pu="2950">
+      <td class="c-n">8.2</td>
+      <td class="c-desc"><span class="d-txt">Mostrador de caja a medida en DM lacado con encimera de compacto, cajones y pasacables.</span></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>1<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">2.950,00</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>3.392,50</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>3.392,50</span></td>
+    </tr>
+    <tr class="cap-sub"><td colspan="6">Subtotal capítulo 8</td><td class="c-r"><span data-sub="8">5.747,70</span></td></tr>
+  </tbody><tbody class="cap" data-cap="9">
+    <tr class="cap-head"><td colspan="7"><span class="cap-n">09</span>Legalización y varios</td></tr>
+    <tr class="p-row" data-med="1" data-pu="1850">
+      <td class="c-n">9.1</td>
+      <td class="c-desc"><span class="d-txt">Proyecto de actividad y legalización de la instalación eléctrica, con boletín y certificados.</span><div class="p-nota"><b>Nota</b> Tasas municipales no incluidas.</div></td>
+      <td class="c-ud">ud</td>
+      <td class="c-r" data-l="Medición"><span>1<span class="ud-m"> ud</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">1.850,00</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>2.127,50</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>2.127,50</span></td>
+    </tr><tr class="p-row" data-med="420" data-pu="3.2">
+      <td class="c-n">9.2</td>
+      <td class="c-desc"><span class="d-txt">Limpieza final de obra antes de la entrega a la marca.</span></td>
+      <td class="c-ud">m²</td>
+      <td class="c-r" data-l="Medición"><span>420,00<span class="ud-m"> m²</span></span></td>
+      <td class="c-r c-base" data-l="Precio base">3,20</td>
+      <td class="c-r" data-l="Precio aplicado"><span data-pa>3,68</span></td>
+      <td class="c-r c-imp" data-l="Importe"><span data-imp>1.545,60</span></td>
+    </tr>
+    <tr class="cap-sub"><td colspan="6">Subtotal capítulo 9</td><td class="c-r"><span data-sub="9">3.673,10</span></td></tr>
+  </tbody>
+    </table>
+
+    <div class="cierre">
+      <table class="resumen">
+        <tr class="h"><td colspan="2">Resumen por capítulos</td></tr>
+        <tr><td>01 · Trabajos previos y demoliciones</td><td class="c-r"><span data-res="1">5.074,03</span></td></tr><tr><td>02 · Tabiquería y techos</td><td class="c-r"><span data-res="2">20.612,97</span></td></tr><tr><td>03 · Electricidad e iluminación</td><td class="c-r"><span data-res="3">22.350,54</span></td></tr><tr><td>04 · Climatización</td><td class="c-r"><span data-res="4">13.901,20</span></td></tr><tr><td>05 · Pavimentos</td><td class="c-r"><span data-res="5">26.818,46</span></td></tr><tr><td>06 · Pintura</td><td class="c-r"><span data-res="6">6.737,36</span></td></tr><tr><td>07 · Escaparate y fachada al centro</td><td class="c-r"><span data-res="7">1.426,00</span></td></tr><tr><td>08 · Mobiliario y montaje</td><td class="c-r"><span data-res="8">5.747,70</span></td></tr><tr><td>09 · Legalización y varios</td><td class="c-r"><span data-res="9">3.673,10</span></td></tr>
+        <tr class="sep"><td>Coste según vuestra base, con zona</td><td class="c-r"><span data-coste>92.474,16</span></td></tr>
+        <tr><td>Beneficio (<span data-ben>15</span> %)</td><td class="c-r"><span data-benimp>13.867,20</span></td></tr>
+        <tr class="t"><td>Total presupuesto sin IVA</td><td class="c-r"><span data-total>106.341,36</span> €</td></tr>
+        <tr class="pend"><td colspan="2">Sin contar las 2 partidas del escaparate pendientes de precio.</td></tr>
+      </table>
+      <div class="cierre-nota">
+        <p><b>IVA no incluido.</b> Se añadirá el tipo vigente en factura.</p>
+        <p>Presupuesto hecho con las mediciones recibidas. Si cambian durante la obra, se valorará la diferencia.</p>
+        <p>El mobiliario, el rótulo y el vinilo de obra los aporta la marca y no están incluidos.</p>
+        <p>Las 2 partidas marcadas en ámbar no tienen precio en vuestra base. No se inventan: se ha pedido precio al industrial y entran en el total cuando llegue y lo reviséis.</p>
+      </div>
+    </div>
+
+    <div class="firmas">
+      <div class="firma"><b>Revisado y firmado</b>Ouxion</div>
+      <div class="firma"><b>Conforme</b>NORDA</div>
+    </div>
+
+    <div class="pie">
+      <span>Documento de muestra · marca, obra y precios inventados</span>
+      <span>Preparado con <span class="pk">pracmatik<i>.</i></span></span>
+    </div>
+  </article>
+</main>
+
+<div class="acciones"><a href="../">Volver a la propuesta</a> · <a href="#" id="imprimir" data-track="presupuesto-imprimir">Imprimir o guardar en PDF</a></div>
+
+<script>
+(function () {
+  'use strict';
+  var ZONAS = [["Barcelona",1],["Girona",1.03],["Tarragona",1.02],["Madrid",1.08],["Valencia",0.98],["Málaga",1.04],["Baleares",1.15],["Lisboa",1.06],["País Vasco",1.07]];
+  function eur(n) {
+    var p = Math.abs(n).toFixed(2).split('.');
+    return (n < 0 ? '-' : '') + p[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ',' + p[1];
+  }
+  function r2(n) { return Math.round(n * 100) / 100; }
+  var zona = document.getElementById('zona'), ben = document.getElementById('ben'), benO = document.getElementById('ben-o');
+
+  /* las cifras que cambian se iluminan un instante */
+  function pon(el, txt) {
+    if (!el || el.textContent === txt) return;
+    el.textContent = txt;
+    el.classList.add('v-upd', 'flash');
+    setTimeout(function () { el.classList.remove('flash'); }, 450);
+  }
+
+  function recalcula() {
+    var coef = parseFloat(zona.value), b = parseInt(ben.value, 10), f = coef * (1 + b / 100);
+    var total = 0, coste = 0;
+    [].forEach.call(document.querySelectorAll('tbody.cap'), function (cap) {
+      var sub = 0;
+      [].forEach.call(cap.querySelectorAll('.p-row'), function (tr) {
+        if (tr.dataset.pu === '') return;
+        var med = parseFloat(tr.dataset.med), pu = parseFloat(tr.dataset.pu), pa = r2(pu * f);
+        sub += r2(med * pa); coste += r2(med * pu * coef);
+        pon(tr.querySelector('[data-pa]'), eur(pa));
+        pon(tr.querySelector('[data-imp]'), eur(r2(med * pa)));
+      });
+      sub = r2(sub); total += sub;
+      var n = cap.dataset.cap;
+      pon(document.querySelector('[data-sub="' + n + '"]'), eur(sub));
+      pon(document.querySelector('[data-res="' + n + '"]'), eur(sub));
+    });
+    total = r2(total); coste = r2(coste);
+    pon(document.querySelector('[data-total]'), eur(total));
+    pon(document.querySelector('[data-coste]'), eur(coste));
+    pon(document.querySelector('[data-benimp]'), eur(r2(total - coste)));
+    document.querySelector('[data-ben]').textContent = b;
+    pon(document.getElementById('tot-bar'), eur(total) + ' €');
+    benO.textContent = b + ' %';
+    var z = ZONAS.filter(function (x) { return String(x[1]) === zona.value; })[0];
+    document.getElementById('cond-zona').textContent = z ? z[0] : '';
+    document.getElementById('cond-coef').textContent = coef.toFixed(2).replace('.', ',');
+    document.getElementById('cond-ben').textContent = b + ' %';
+  }
+  zona.addEventListener('change', function () {
+    recalcula();
+    if (window.oxTrack) window.oxTrack('presupuesto-zona', { zona: zona.options[zona.selectedIndex].text });
+  });
+  ben.addEventListener('input', recalcula);
+  ben.addEventListener('change', function () { if (window.oxTrack) window.oxTrack('presupuesto-beneficio', { pct: ben.value }); });
+  document.getElementById('imprimir').addEventListener('click', function (e) { e.preventDefault(); window.print(); });
+  recalcula();
+})();
+</script>
+</body>
+</html>

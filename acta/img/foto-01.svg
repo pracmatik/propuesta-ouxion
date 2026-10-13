@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" role="img" aria-label="Frente del local B-14">
+  <rect width="640" height="480" fill="#1f1d1c"/>
+  <path d="M0 86 h640" stroke="#4a4642" stroke-width="1.4"/><path d="M40 60 v26" stroke="#4a4642" stroke-width="1"/><path d="M96 60 v26" stroke="#4a4642" stroke-width="1"/><path d="M152 60 v26" stroke="#4a4642" stroke-width="1"/><path d="M208 60 v26" stroke="#4a4642" stroke-width="1"/><path d="M264 60 v26" stroke="#4a4642" stroke-width="1"/><path d="M320 60 v26" stroke="#4a4642" stroke-width="1"/><path d="M376 60 v26" stroke="#4a4642" stroke-width="1"/><path d="M432 60 v26" stroke="#4a4642" stroke-width="1"/><path d="M488 60 v26" stroke="#4a4642" stroke-width="1"/><path d="M544 60 v26" stroke="#4a4642" stroke-width="1"/><path d="M600 60 v26" stroke="#4a4642" stroke-width="1"/>
+  <rect x="96" y="120" width="448" height="290" fill="#292624" stroke="#6f6a63" stroke-width="1.6"/>
+  <rect x="120" y="140" width="400" height="38" fill="none" stroke="#A18148" stroke-width="1.4" opacity=".85"/>
+  <text x="320" y="166" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="19" letter-spacing="9" fill="#A18148" opacity=".9">NORDA</text>
+  <path d="M120 196 h400" stroke="#6f6a63" stroke-width="2.2"/><path d="M120 196 v214" stroke="#6f6a63" stroke-width="2.2"/><path d="M186.6 196 v214" stroke="#6f6a63" stroke-width="1.1"/><path d="M253.2 196 v214" stroke="#6f6a63" stroke-width="1.1"/><path d="M319.79999999999995 196 v214" stroke="#6f6a63" stroke-width="1.1"/><path d="M386.4 196 v214" stroke="#6f6a63" stroke-width="1.1"/><path d="M453 196 v214" stroke="#6f6a63" stroke-width="1.1"/><path d="M519.5999999999999 196 v214" stroke="#6f6a63" stroke-width="2.2"/>
+  <rect x="253" y="250" width="134" height="160" fill="none" stroke="#8a8378" stroke-width="1.4"/>
+  <path d="M320 250 v160" stroke="#8a8378" stroke-width="1"/>
+  <path d="M0 410 h640" stroke="#6f6a63" stroke-width="2"/>
+  <path d="M0 440 h640" stroke="#3a3735" stroke-width="1"/>
+</svg>

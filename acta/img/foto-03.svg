@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="480" viewBox="0 0 640 480" role="img" aria-label="Escaparate · línea independiente al cuadro">
+  <rect width="640" height="480" fill="#eeebe6"/>
+  <rect x="0.5" y="0.5" width="639" height="479" fill="none" stroke="#d3cdc4"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M80 80 h480 v260 h-480 z" stroke="#9c958b" stroke-width="2.4"/><path d="M80 110 h480" stroke="#c4beb4" stroke-width="1.4"/><path d="M130 110 l-10 24 h20 z" stroke="#9c958b" stroke-width="1.6"/><path d="M206 110 l-10 24 h20 z" stroke="#9c958b" stroke-width="1.6"/><path d="M282 110 l-10 24 h20 z" stroke="#9c958b" stroke-width="1.6"/><path d="M358 110 l-10 24 h20 z" stroke="#9c958b" stroke-width="1.6"/><path d="M434 110 l-10 24 h20 z" stroke="#9c958b" stroke-width="1.6"/><path d="M510 110 l-10 24 h20 z" stroke="#9c958b" stroke-width="1.6"/><path d="M560 96 h40 v220" stroke="#A18148" stroke-width="2" stroke-dasharray="6 6"/><rect x="586" y="316" width="28" height="36" stroke="#A18148" stroke-width="2"/><rect x="270" y="190" width="100" height="62" stroke="#c4beb4" stroke-width="1.6"/></g>
+  <text x="40" y="420" font-family="Helvetica, Arial, sans-serif" font-size="19" fill="#6f6a63">Escaparate · línea independiente al cuadro</text>
+  <text x="40" y="446" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#a39d94" letter-spacing="1.8">FOTO DE LA VISITA · MUESTRA</text>
+  <text x="600" y="446" text-anchor="end" font-family="Helvetica, Arial, sans-serif" font-size="11" fill="#a39d94" letter-spacing="1.2">03</text>
+</svg>

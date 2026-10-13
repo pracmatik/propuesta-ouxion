@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ouxion · Propuesta de Pracmatik</title>
+<meta name="description" content="Presupuestos y actas de obra automáticos, preparado para Ouxion.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="assets/ouxion-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="track.js"></script>
+<style>
+:root{
+  --ocre:#A18148; --ocre-claro:#C7B299; --ocre-tinta:#7d6233;
+  --piedra:#F7F7F7; --blanco:#fff; --grafito:#141215; --titulo:#333; --gris:#707070; --linea:#e3e0da;
+  --ambar:#b7791f;
+  --ancho:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--piedra);color:var(--titulo);font:16px/1.65 Montserrat,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ocre);outline-offset:3px}
+.env{max-width:var(--ancho);margin:0 auto;padding:0 24px}
+h1,h2,h3{color:var(--grafito);margin:0;letter-spacing:-.02em;line-height:1.1}
+h2{font-size:clamp(28px,4vw,46px);font-weight:900;max-width:18ch}
+h3{font-size:20px;font-weight:800;letter-spacing:-.01em}
+p{margin:0 0 1em;max-width:62ch}
+.intro{font-size:18px;color:var(--gris);max-width:58ch;margin-top:18px}
+section{padding:110px 0}
+
+/* Cabecera */
+.cab{position:absolute;top:0;left:0;right:0;z-index:5}
+.cab .env{display:flex;justify-content:space-between;align-items:center;padding-top:22px}
+.cab img{height:72px;width:auto;filter:brightness(0) invert(1);opacity:.92}
+.firma{font-weight:800;letter-spacing:-.03em;font-size:17px;color:#fff;text-decoration:none}
+.firma span{color:var(--grafito)}
+.firma small{display:block;font-weight:500;font-size:11px;letter-spacing:0;opacity:.7;text-align:right}
+
+/* Portada: la valla de obra de una tienda antes de abrir */
+.valla{position:relative;background:var(--ocre);color:#fff;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden;padding:150px 0 70px}
+.valla::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),rgba(0,0,0,.09) calc(25% - 1px) 25%);pointer-events:none}
+.valla .env{position:relative;width:100%}
+.aviso{display:inline-block;background:var(--grafito);color:#fff;font-weight:700;font-size:13px;padding:8px 14px;margin-bottom:34px}
+.valla h1{color:#fff;font-weight:900;font-size:clamp(46px,8.4vw,128px);line-height:.92;letter-spacing:-.045em;max-width:11ch}
+.valla .sub{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px;margin-top:48px;align-items:end}
+.valla .sub p{font-size:19px;line-height:1.55;color:#fff;margin:0;max-width:44ch}
+.cuenta{border-left:2px solid rgba(255,255,255,.5);padding-left:22px}
+.cuenta b{display:block;font-size:15px;font-weight:600;opacity:.85}
+.cuenta .t{font-size:clamp(30px,3.6vw,46px);font-weight:900;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
+.cuenta .t s{opacity:.55;text-decoration-thickness:3px;font-weight:700}
+.bajar{display:inline-flex;gap:12px;align-items:center;margin-top:40px;background:#fff;color:var(--grafito);text-decoration:none;font-weight:800;padding:16px 24px}
+.bajar:hover{background:var(--grafito);color:#fff}
+
+/* Lo que hablamos */
+.hablamos .rej{display:grid;grid-template-columns:1fr 1.25fr;gap:70px;align-items:start}
+.cita{font-size:22px;line-height:1.5;color:var(--grafito);font-weight:600;border-left:4px solid var(--ocre);padding-left:24px;margin:30px 0 0}
+.cita small{display:block;font-size:14px;color:var(--gris);font-weight:500;margin-top:12px}
+.pasos{list-style:none;margin:0;padding:0;counter-reset:p}
+.pasos li{counter-increment:p;display:grid;grid-template-columns:54px 1fr;gap:4px 18px;padding:22px 0;border-top:1px solid var(--linea)}
+.pasos li::before{content:counter(p);grid-row:span 2;font-size:34px;font-weight:900;color:var(--ocre);line-height:1}
+.pasos p{margin:4px 0 0;color:var(--gris)}
+
+/* Vídeos */
+.videos{background:var(--grafito);color:#ddd}
+.videos h2,.videos h3{color:#fff}
+.videos .intro{color:#aaa}
+.par{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:54px}
+.vid video{width:100%;aspect-ratio:16/9;background:#000;border:1px solid #2b2829}
+.vid h3{margin-top:20px}
+.vid p{color:#a9a5a0;margin-top:6px;font-size:15px}
+.dur{font-weight:600;color:var(--ocre-claro);font-size:14px}
+
+/* Documentos de muestra */
+.docs .lista{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:24px;margin-top:54px}
+.doc{background:#fff;text-decoration:none;display:flex;flex-direction:column;border:1px solid var(--linea);transition:border-color .2s}
+.doc:hover{border-color:var(--ocre)}
+.doc .img{aspect-ratio:4/3;overflow:hidden;background:#ece9e3;border-bottom:1px solid var(--linea)}
+.doc .img img{width:100%;height:100%;object-fit:cover;object-position:top left}
+.doc .txt{padding:22px 24px 26px}
+.doc .txt p{color:var(--gris);font-size:15px;margin:8px 0 14px}
+.doc .ir{font-weight:800;color:var(--ocre-tinta);font-size:14px}
+.nota{font-size:13px;color:var(--gris);margin-top:22px}
+
+/* Mapa de obras */
+.mapa{background:#fff}
+.mapa .rej{display:grid;grid-template-columns:1fr 1.1fr;gap:70px;align-items:center}
+.barras{list-style:none;margin:0;padding:0}
+.barras li{display:grid;grid-template-columns:110px 1fr 56px 64px;gap:14px;align-items:center;padding:9px 0;font-size:15px;border-bottom:1px solid #f0eee9}
+.barras .b{height:10px;background:var(--ocre-claro)}
+.barras .b i{display:block;height:100%;background:var(--ocre)}
+.barras .n{text-align:right;color:var(--gris);font-variant-numeric:tabular-nums}
+.barras .c{text-align:right;font-weight:800;color:var(--grafito);font-variant-numeric:tabular-nums}
+.leyenda{font-size:13px;color:var(--gris);margin-top:14px}
+
+/* Calculadora */
+.calc .caja{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:50px;background:#fff;border:1px solid var(--linea)}
+.calc form{padding:36px}
+.campo{margin-bottom:22px}
+.campo label{display:flex;justify-content:space-between;font-weight:600;font-size:15px;color:var(--grafito)}
+.campo output{font-weight:800;color:var(--ocre-tinta);font-variant-numeric:tabular-nums}
+.campo input{width:100%;accent-color:var(--ocre);margin-top:8px}
+.campo small{color:var(--gris);font-size:13px}
+.res{background:var(--grafito);color:#fff;padding:36px;display:flex;flex-direction:column;justify-content:space-between}
+.res .grande{font-size:clamp(46px,6vw,80px);font-weight:900;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+.res .lin{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid #2e2b2c;font-size:15px;color:#cfcac4}
+.res .lin b{color:#fff;font-variant-numeric:tabular-nums}
+.res .pie{font-size:13px;color:#8f8a85;margin-top:18px}
+
+/* A medida */
+.medida .rej{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--linea);border:1px solid var(--linea);margin-top:50px}
+.medida article{background:var(--piedra);padding:34px}
+.medida article p{color:var(--gris);margin-top:10px}
+.chat{background:#fff;border:1px solid var(--linea);padding:18px;margin-top:16px;font-size:14px}
+.chat .yo{background:var(--grafito);color:#fff;padding:10px 14px;margin-left:auto;max-width:85%;width:fit-content}
+.chat .el{background:#f1ede5;padding:10px 14px;margin-top:10px;max-width:92%}
+.etq{font-size:12px;font-weight:700;color:var(--ocre-tinta)}
+
+/* Preguntas */
+.faq{background:#fff}
+.faq .rej{display:grid;grid-template-columns:1fr 1.6fr;gap:70px}
+details{border-top:1px solid var(--linea);padding:6px 0}
+details:last-child{border-bottom:1px solid var(--linea)}
+summary{cursor:pointer;list-style:none;font-weight:700;font-size:18px;color:var(--grafito);padding:16px 40px 16px 0;position:relative}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";position:absolute;right:6px;top:10px;font-size:28px;font-weight:400;color:var(--ocre);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{color:var(--gris);padding-bottom:10px}
+
+/* Cierre */
+.cierre{background:var(--ocre);color:#fff}
+.cierre h2{color:#fff;max-width:16ch;font-size:clamp(34px,5.4vw,70px)}
+.cierre p{font-size:19px;max-width:52ch;margin-top:20px}
+.botones{display:flex;flex-wrap:wrap;gap:14px;margin-top:36px}
+.btn{display:inline-block;text-decoration:none;font-weight:800;padding:17px 26px;border:2px solid #fff}
+.btn.lleno{background:#fff;color:var(--grafito)}
+.btn:hover{background:var(--grafito);border-color:var(--grafito);color:#fff}
+footer{background:var(--grafito);color:#8f8a85;font-size:13px;padding:34px 0}
+footer .env{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer b{color:#fff;font-weight:800;letter-spacing:-.03em}
+footer b span{color:var(--ambar)}
+
+@media (max-width:900px){
+  section{padding:76px 0}
+  .valla .sub,.hablamos .rej,.par,.docs .lista,.mapa .rej,.calc .caja,.medida .rej,.faq .rej{grid-template-columns:1fr}
+  .hablamos .rej,.mapa .rej,.faq .rej{gap:36px}
+  .cab img{height:56px}
+  .barras li{grid-template-columns:92px 1fr 40px 52px;gap:10px}
+  .calc form,.res,.medida article{padding:26px}
+}
+@media (max-width:480px){ .env{padding:0 16px} .valla{padding-top:120px} }
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} *{transition:none!important} }
+</style>
+</head>
+<body>
+
+<header class="cab">
+  <div class="env">
+    <img src="assets/ouxion-logo.png" alt="Ouxion" width="99" height="142">
+    <a class="firma" href="https://www.pracmatik.com" target="_blank" rel="noopener" data-track="logo pracmatik">pracmatik<span>.</span><small>propuesta para Ouxion</small></a>
+  </div>
+</header>
+
+<main>
+<section class="valla" id="portada">
+  <div class="env">
+    <div class="aviso">Sergio, esto es lo que nos pediste por teléfono</div>
+    <h1>Presupuestos en minutos. Obras sin papeles.</h1>
+    <div class="sub">
+      <p>Dos vídeos cortos para enseñarlo en vuestra reunión, y además un presupuesto, un acta y un panel de obra de verdad para tocar, hechos con una tienda inventada como las que montáis vosotros.</p>
+      <div class="cuenta">
+        <b>Un presupuesto de tienda de 420 m²</b>
+        <div class="t"><s>6 horas</s> 4 minutos</div>
+        <b>y una persona que lo revisa y lo firma</b>
+      </div>
+    </div>
+    <a class="bajar" href="#videos" data-track="portada: ver los videos">Ver los dos vídeos</a>
+  </div>
+</section>
+
+<section class="hablamos" id="lo-que-hablamos">
+  <div class="env rej">
+    <div>
+      <h2>Lo que nos contaste</h2>
+      <p class="cita">La medición la pasamos a Excel, al lado tenemos la base con los precios de los industriales y le cargamos el porcentaje de beneficio.<small>Sergio, en la llamada del 13 de octubre</small></p>
+    </div>
+    <ol class="pasos">
+      <li><h3>El sistema hace ese mismo trabajo</h3><p>Con vuestra base de precios y vuestro beneficio. No cambia vuestra forma de presupuestar, se quita la parte de copiar y buscar.</p></li>
+      <li><h3>Sabe dónde está la obra</h3><p>Una tienda en Palma no cuesta lo mismo que en Sabadell. Cada zona lleva su coeficiente, y lo ponéis vosotros.</p></li>
+      <li><h3>Nunca se inventa un precio</h3><p>Si una partida no está en vuestra base, sale marcada y se le pide al industrial. Nada se cuela sin que lo veáis.</p></li>
+      <li><h3>Y las visitas de obra se quedan escritas</h3><p>El jefe de obra manda audios y fotos desde el móvil. Al salir de la tienda ya tiene el acta, y cada industrial sabe qué le toca y para cuándo.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="videos" id="videos">
+  <div class="env">
+    <h2>Los dos vídeos para la reunión</h2>
+    <p class="intro">Se entienden también sin sonido. Podéis ponerlos en pantalla tal cual.</p>
+    <div class="par">
+      <div class="vid">
+        <video data-video="presupuestos" controls preload="metadata" playsinline poster="videos/presupuestos.jpg">
+          <source src="videos/presupuestos.mp4" type="video/mp4">
+          <track kind="subtitles" srclang="es" label="Español" src="videos/presupuestos.vtt">
+        </video>
+        <h3>Presupuestos automáticos</h3>
+        <p>De la medición que os manda el arquitecto al presupuesto listo para firmar, con vuestros precios y el coeficiente de cada ciudad.</p>
+        <span class="dur" data-dur="presupuestos"></span>
+      </div>
+      <div class="vid">
+        <video data-video="actas" controls preload="metadata" playsinline poster="videos/actas.jpg">
+          <source src="videos/actas.mp4" type="video/mp4">
+          <track kind="subtitles" srclang="es" label="Español" src="videos/actas.vtt">
+        </video>
+        <h3>Actas de visita y control de la obra</h3>
+        <p>De las notas de voz del jefe de obra al acta firmada, las tareas de cada industrial y quién ha retrasado la apertura.</p>
+        <span class="dur" data-dur="actas"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="docs" id="documentos">
+  <div class="env">
+    <h2>Abridlos y tocadlos</h2>
+    <p class="intro">No son dibujos. Son los documentos que sacan nuestros sistemas, con una obra inventada: la tienda NORDA en un centro comercial, 420 m², seis semanas, apertura el 20 de noviembre.</p>
+    <div class="lista">
+      <a class="doc" href="presupuesto/" data-track="abrir presupuesto">
+        <div class="img"><img src="assets/prev-presupuesto.jpg" alt="Presupuesto de la tienda NORDA" loading="lazy"></div>
+        <div class="txt"><h3>El presupuesto</h3><p>Cambiad la ciudad o el beneficio y mirad cómo se recalcula todo. Las partidas sin precio salen marcadas.</p><span class="ir">Abrir el presupuesto</span></div>
+      </a>
+      <a class="doc" href="acta/" data-track="abrir acta">
+        <div class="img"><img src="assets/prev-acta.jpg" alt="Acta de visita de la obra NORDA" loading="lazy"></div>
+        <div class="txt"><h3>El acta de visita</h3><p>Fotos en su sitio, redacción técnica y tareas por industrial con fecha.</p><span class="ir">Abrir el acta</span></div>
+      </a>
+      <a class="doc" href="panel/" data-track="abrir panel">
+        <div class="img"><img src="assets/prev-panel.jpg" alt="Panel de obras" loading="lazy"></div>
+        <div class="txt"><h3>El panel de obras</h3><p>Todas las tiendas abiertas a la vez, su avance y quién ha causado cada día de retraso.</p><span class="ir">Abrir el panel</span></div>
+      </a>
+    </div>
+    <p class="nota">Todos los nombres, empresas e importes son inventados. Ningún dato procede de ningún cliente.</p>
+  </div>
+</section>
+
+<section class="mapa" id="vuestras-obras">
+  <div class="env rej">
+    <div>
+      <h2>Vuestras obras no están todas en Sabadell</h2>
+      <p class="intro">Según vuestra web lleváis unas 325 obras en 13 ciudades. Cada una con su coste de mano de obra, desplazamientos y dietas. Con el sistema, el presupuesto ya sale con el coeficiente de la ciudad, sin que nadie se acuerde de aplicarlo.</p>
+    </div>
+    <div>
+      <ul class="barras" aria-label="Obras por zona y coeficiente de ejemplo">
+        <li><span>Barcelona</span><span class="b"><i style="width:100%"></i></span><span class="n">250</span><span class="c">1,00</span></li>
+        <li><span>Madrid</span><span class="b"><i style="width:8%"></i></span><span class="n">20</span><span class="c">1,08</span></li>
+        <li><span>Tarragona</span><span class="b"><i style="width:6%"></i></span><span class="n">15</span><span class="c">1,02</span></li>
+        <li><span>Girona</span><span class="b"><i style="width:4%"></i></span><span class="n">10</span><span class="c">1,03</span></li>
+        <li><span>Baleares</span><span class="b"><i style="width:4%"></i></span><span class="n">10</span><span class="c">1,15</span></li>
+        <li><span>Valencia</span><span class="b"><i style="width:2%"></i></span><span class="n">4</span><span class="c">0,98</span></li>
+        <li><span>País Vasco</span><span class="b"><i style="width:1.5%"></i></span><span class="n">3</span><span class="c">1,07</span></li>
+        <li><span>Lisboa</span><span class="b"><i style="width:1.5%"></i></span><span class="n">3</span><span class="c">1,06</span></li>
+        <li><span>Málaga</span><span class="b"><i style="width:1%"></i></span><span class="n">2</span><span class="c">1,04</span></li>
+      </ul>
+      <p class="leyenda">Obras según vuestra web y coeficiente de ejemplo sobre el precio base. Los coeficientes de verdad los ponéis vosotros y se cambian cuando queráis.</p>
+    </div>
+  </div>
+</section>
+
+<section class="calc" id="calculadora">
+  <div class="env">
+    <h2>Cuánto tiempo os devuelve</h2>
+    <p class="intro">Hemos puesto números razonables para una empresa como la vuestra. Moved las barras con los vuestros de verdad.</p>
+    <div class="caja">
+      <form id="calc" oninput="calcular()">
+        <div class="campo"><label for="np">Presupuestos al año <output id="o-np"></output></label><input id="np" type="range" min="20" max="400" step="10" value="150"><small>Contando los que no salen adelante</small></div>
+        <div class="campo"><label for="hp">Horas por presupuesto hoy <output id="o-hp"></output></label><input id="hp" type="range" min="1" max="16" step="0.5" value="6"><small>Pasar a Excel, buscar precios, aplicar beneficio, repasar</small></div>
+        <div class="campo"><label for="no">Obras al año <output id="o-no"></output></label><input id="no" type="range" min="5" max="120" step="1" value="40"></div>
+        <div class="campo"><label for="vo">Visitas por obra <output id="o-vo"></output></label><input id="vo" type="range" min="1" max="20" step="1" value="6"></div>
+        <div class="campo"><label for="ha">Horas por acta hoy <output id="o-ha"></output></label><input id="ha" type="range" min="0.5" max="4" step="0.25" value="1.5"><small>Redactar, ordenar fotos y avisar a cada industrial</small></div>
+        <div class="campo"><label for="ch">Coste de una hora de técnico <output id="o-ch"></output></label><input id="ch" type="range" min="20" max="70" step="1" value="35"></div>
+      </form>
+      <div class="res" aria-live="polite">
+        <div>
+          <div class="etq" style="color:var(--ocre-claro)">Horas que dejáis de dedicar al año</div>
+          <div class="grande" id="r-h">0</div>
+          <div style="margin-top:8px;color:#cfcac4" id="r-p"></div>
+        </div>
+        <div style="margin-top:26px">
+          <div class="lin"><span>En presupuestos</span><b id="r-hp"></b></div>
+          <div class="lin"><span>En actas</span><b id="r-ha"></b></div>
+          <div class="lin"><span>En dinero</span><b id="r-e"></b></div>
+          <div class="lin"><span>Se paga en</span><b id="r-m"></b></div>
+          <p class="pie">Con el sistema contamos 40 minutos de revisión por presupuesto y 10 por acta. Inversión con precios públicos desde: 9.450 € de puesta en marcha y 480 € al mes por los dos, sin IVA. Lo que no se cuenta aquí: las obras que ganáis por contestar el mismo día.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="medida" id="a-medida">
+  <div class="env">
+    <h2>Y lo que podemos montar solo para vosotros</h2>
+    <p class="intro">Estas piezas se hacen a medida, sobre lo anterior. Os las contamos porque encajan con cómo trabajáis.</p>
+    <div class="rej">
+      <article>
+        <h3>Pedir precio a los industriales solo</h3>
+        <p>Si a una partida le falta precio, el sistema escribe al industrial de vuestra lista, recoge su respuesta y la mete en el presupuesto. Si pedís a tres, os pone la comparativa.</p>
+      </article>
+      <article>
+        <h3>Preguntar a vuestros presupuestos antiguos</h3>
+        <p>Todo lo que habéis presupuestado, consultable escribiendo como en un chat. Sin buscar el Excel de turno.</p>
+        <div class="chat" aria-label="Ejemplo de consulta">
+          <div class="yo">¿A cuánto pusimos el m² de techo de pladur en la tienda de Gandía?</div>
+          <div class="el">A 38,40 €/m² en marzo de 2024, 212 m², industrial Pladur Sant Quirze. Hoy en vuestra base está a 41,10 €.</div>
+          <div class="etq" style="margin-top:10px">Ejemplo con datos inventados</div>
+        </div>
+      </article>
+      <article>
+        <h3>Una ventana para la marca</h3>
+        <p>El responsable de expansión de la marca ve el avance de su tienda y las actas que vosotros elijáis. Deja de llamar para preguntar cómo va.</p>
+      </article>
+      <article>
+        <h3>El dossier de cierre de obra</h3>
+        <p>Al entregar la tienda, todo el historial de actas, tareas y fotos sale firmado y enviado a todos. Nadie puede decir que no lo sabía.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="preguntas">
+  <div class="env rej">
+    <div>
+      <h2>Lo que os vais a preguntar en la reunión</h2>
+      <p class="intro">Si falta alguna, escribidnos y la añadimos aquí.</p>
+    </div>
+    <div>
+      <details><summary>¿Hay que meter nuestra información en nuestro servidor?</summary><p>No hace falta tocar vuestro servidor. Funciona en el nuestro, con vuestros datos separados de los de cualquier otra empresa, y son vuestros: os los entregamos enteros cuando los pidáis. Se puede montar en vuestro servidor, pero entonces si algo falla no podemos entrar a arreglarlo en el momento, y eso en una obra con fecha de apertura no conviene.</p></details>
+      <details><summary>¿Lee los planos o el modelo de Revit?</summary><p>No. Lee la medición: PDF (también escaneado), Excel, BC3 o Word. Si la medición sale de Revit, se exporta a Excel o BC3 y el sistema la lee igual. Preferimos decirlo claro antes que prometer algo que no hace.</p></details>
+      <details><summary>¿Con qué precios trabaja?</summary><p>Con los vuestros. Nos pasáis la base que tenéis hoy, en el formato que la tengáis, y el sistema la usa. Podéis cambiar precios, coeficientes de zona y beneficio cuando queráis.</p></details>
+      <details><summary>¿Y si se equivoca?</summary><p>Ningún presupuesto sale sin que una persona de Ouxion lo revise y lo firme. Lo que el sistema no tiene claro lo marca en ámbar, nunca lo rellena por su cuenta. No prometemos cero errores, prometemos que ninguno pasa sin que lo veáis.</p></details>
+      <details><summary>¿Tiene que aprender algo el jefe de obra?</summary><p>No. Usa el móvil y Telegram, que ya sabe usar. Manda notas de voz, fotos y vídeos como haría por WhatsApp. El acta sale en castellano o en catalán según hable.</p></details>
+      <details><summary>Ya usamos una app para los informes de visita</summary><p>Lo miramos con vosotros. Si os funciona bien para fotos e incidencias, la diferencia es lo que pasa después: el acta redactada sola, las tareas a cada industrial con su fecha y el control de quién retrasa la apertura.</p></details>
+      <details><summary>¿Cuánto cuesta?</summary><p>Precios públicos sin IVA: las actas, 3.450 € de puesta en marcha y 240 € al mes. Los presupuestos, desde 6.000 € y desde 240 € al mes. El precio exacto os lo damos por escrito cuando veamos una medición vuestra y vuestra base de precios.</p></details>
+      <details><summary>¿Cómo se empieza?</summary><p>Nos mandáis la medición de una obra real que ya hayáis presupuestado, y vuestro presupuesto de esa obra si queréis comparar. Os devolvemos el resultado y lo ponéis al lado del vuestro.</p></details>
+      <details><summary>¿Quiénes sois?</summary><p>Pracmatik, de Barcelona. Hacemos automatizaciones para constructoras y estudios de arquitectura, y trabajamos en toda España. Todo se implanta a distancia.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="cierre" id="siguiente-paso">
+  <div class="env">
+    <h2>Mandadnos una medición de verdad</h2>
+    <p>La de cualquier tienda que ya hayáis presupuestado. Os devolvemos el presupuesto hecho con el sistema y lo comparáis con el vuestro. Es la forma más rápida de saber si os sirve.</p>
+    <div class="botones">
+      <a class="btn lleno" href="mailto:albert@pracmatik.com?subject=Medici%C3%B3n%20de%20Ouxion" data-track="cierre: enviar medicion por correo">Enviar una medición por correo</a>
+      <a class="btn" href="https://wa.me/34680613913?text=Hola%20Albert%2C%20soy%20de%20Ouxion" target="_blank" rel="noopener" data-track="cierre: whatsapp">Escribir por WhatsApp</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="env">
+    <span>Preparado por <b>pracmatik<span>.</span></b> para Ouxion · 13 de octubre de 2026</span>
+    <span>Albert Grau · albert@pracmatik.com · 680 613 913</span>
+  </div>
+</footer>
+
+<script>
+function fmt(n,d){return n.toLocaleString('es-ES',{maximumFractionDigits:d||0,useGrouping:'always'})}
+function calcular(){
+  var v=function(id){return parseFloat(document.getElementById(id).value)};
+  var np=v('np'),hp=v('hp'),no=v('no'),vo=v('vo'),ha=v('ha'),ch=v('ch');
+  var horasP=Math.max(0,np*(hp-40/60)), horasA=Math.max(0,no*vo*(ha-10/60)), h=horasP+horasA, eur=h*ch;
+  var inversion=9450, cuota=480, ahorroMes=eur/12-cuota;
+  var meses=ahorroMes>0?Math.ceil(inversion/ahorroMes):null;
+  [['np',np],['hp',hp+' h'],['no',no],['vo',vo],['ha',fmt(ha,2)+' h'],['ch',ch+' €']].forEach(function(p){document.getElementById('o-'+p[0]).textContent=typeof p[1]==='number'?fmt(p[1]):p[1]});
+  document.getElementById('r-h').textContent=fmt(Math.round(h/10)*10);
+  document.getElementById('r-p').textContent='Son unas '+fmt(h/1760,1)+' personas a jornada completa';
+  document.getElementById('r-hp').textContent=fmt(Math.round(horasP))+' h';
+  document.getElementById('r-ha').textContent=fmt(Math.round(horasA))+' h';
+  document.getElementById('r-e').textContent=fmt(Math.round(eur/100)*100)+' € al año';
+  document.getElementById('r-m').textContent=meses?(meses+(meses===1?' mes':' meses')):'con estos números, no compensa';
+}
+calcular();
+var tCalc;
+document.getElementById('calc').addEventListener('input',function(){
+  clearTimeout(tCalc);
+  tCalc=setTimeout(function(){ if(window.oxTrack) oxTrack('calculadora',{horas:document.getElementById('r-h').textContent}); },1500);
+});
+document.querySelectorAll('video[data-video]').forEach(function(v){
+  v.addEventListener('loadedmetadata',function(){
+    var s=Math.round(v.duration), el=document.querySelector('[data-dur="'+v.dataset.video+'"]');
+    if(el&&s) el.textContent=Math.floor(s/60)+' min '+String(s%60).padStart(2,'0')+' s';
+  });
+});
+document.querySelectorAll('details').forEach(function(d){
+  d.addEventListener('toggle',function(){ if(d.open&&window.oxTrack) oxTrack('pregunta',{pregunta:d.querySelector('summary').textContent}); });
+});
+</script>
+</body>
+</html>

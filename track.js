@@ -13,11 +13,23 @@
     if (localStorage.getItem('umami.disabled') === '1') return;
   } catch (e) { /* sin almacenamiento: se mide igual */ }
 
-  var s = document.createElement('script');
-  s.defer = true;
-  s.src = HOST + '/script.js';
-  s.setAttribute('data-website-id', SITE);
-  document.head.appendChild(s);
+  if (navigator.webdriver) return; /* navegadores manejados por programas: no son personas */
+
+  /* El contador solo arranca cuando una persona hace algo: mover el ratón, tocar, desplazar o teclear.
+     Los robots cargan la página y se van sin hacer nada, así que no llegan a contar. */
+  var arrancado = false;
+  function arrancar() {
+    if (arrancado) return;
+    arrancado = true;
+    var s = document.createElement('script');
+    s.defer = true;
+    s.src = HOST + '/script.js';
+    s.setAttribute('data-website-id', SITE);
+    document.head.appendChild(s);
+  }
+  ['pointermove', 'touchstart', 'scroll', 'keydown', 'wheel'].forEach(function (ev) {
+    window.addEventListener(ev, arrancar, { once: true, passive: true });
+  });
 
   var cola = [];
   function track(name) {
@@ -33,7 +45,7 @@
   }, 500);
 
   /* Latido cada 15 s con la pestaña visible: sirve para saber el tiempo real */
-  setInterval(function () { if (!document.hidden) track('tiempo'); }, 15000);
+  setInterval(function () { if (arrancado && !document.hidden) track('tiempo'); }, 15000);
 
   /* Cuánto ha leído de la página */
   var marcas = {};

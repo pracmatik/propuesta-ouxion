@@ -291,8 +291,7 @@ footer b span{color:var(--ambar)}
           <div class="lin"><span>En presupuestos</span><b id="r-hp"></b></div>
           <div class="lin"><span>En actas</span><b id="r-ha"></b></div>
           <div class="lin"><span>En dinero</span><b id="r-e"></b></div>
-          <div class="lin"><span>Se paga en</span><b id="r-m"></b></div>
-          <p class="pie">Con el sistema contamos 40 minutos de revisión por presupuesto y 10 por acta. Inversión con precios públicos desde: 9.450 € de puesta en marcha y 480 € al mes por los dos, sin IVA. Lo que no se cuenta aquí: las obras que ganáis por contestar el mismo día.</p>
+          <p class="pie">Con el sistema contamos 40 minutos de revisión por presupuesto y 10 por acta. Lo que no se cuenta aquí: las obras que ganáis por contestar el mismo día.</p>
         </div>
       </div>
     </div>
@@ -342,7 +341,6 @@ footer b span{color:var(--ambar)}
       <details><summary>¿Y si se equivoca?</summary><p>Ningún presupuesto sale sin que una persona de Ouxion lo revise y lo firme. Lo que el sistema no tiene claro lo marca en ámbar, nunca lo rellena por su cuenta. No prometemos cero errores, prometemos que ninguno pasa sin que lo veáis.</p></details>
       <details><summary>¿Tiene que aprender algo el jefe de obra?</summary><p>No. Usa el móvil y Telegram, que ya sabe usar. Manda notas de voz, fotos y vídeos como haría por WhatsApp. El acta sale en castellano o en catalán según hable.</p></details>
       <details><summary>Ya usamos una app para los informes de visita</summary><p>Lo miramos con vosotros. Si os funciona bien para fotos e incidencias, la diferencia es lo que pasa después: el acta redactada sola, las tareas a cada industrial con su fecha y el control de quién retrasa la apertura.</p></details>
-      <details><summary>¿Cuánto cuesta?</summary><p>Precios públicos sin IVA: las actas, 3.450 € de puesta en marcha y 240 € al mes. Los presupuestos, desde 6.000 € y desde 240 € al mes. El precio exacto os lo damos por escrito cuando veamos una medición vuestra y vuestra base de precios.</p></details>
       <details><summary>¿Cómo se empieza?</summary><p>Nos mandáis la medición de una obra real que ya hayáis presupuestado, y vuestro presupuesto de esa obra si queréis comparar. Os devolvemos el resultado y lo ponéis al lado del vuestro.</p></details>
       <details><summary>¿Quiénes sois?</summary><p>Pracmatik, de Barcelona. Hacemos automatizaciones para constructoras y estudios de arquitectura, y trabajamos en toda España. Todo se implanta a distancia.</p></details>
     </div>
@@ -374,15 +372,12 @@ function calcular(){
   var v=function(id){return parseFloat(document.getElementById(id).value)};
   var np=v('np'),hp=v('hp'),no=v('no'),vo=v('vo'),ha=v('ha'),ch=v('ch');
   var horasP=Math.max(0,np*(hp-40/60)), horasA=Math.max(0,no*vo*(ha-10/60)), h=horasP+horasA, eur=h*ch;
-  var inversion=9450, cuota=480, ahorroMes=eur/12-cuota;
-  var meses=ahorroMes>0?Math.ceil(inversion/ahorroMes):null;
   [['np',np],['hp',hp+' h'],['no',no],['vo',vo],['ha',fmt(ha,2)+' h'],['ch',ch+' €']].forEach(function(p){document.getElementById('o-'+p[0]).textContent=typeof p[1]==='number'?fmt(p[1]):p[1]});
   document.getElementById('r-h').textContent=fmt(Math.round(h/10)*10);
   document.getElementById('r-p').textContent='Son unas '+fmt(h/1760,1)+' personas a jornada completa';
   document.getElementById('r-hp').textContent=fmt(Math.round(horasP))+' h';
   document.getElementById('r-ha').textContent=fmt(Math.round(horasA))+' h';
   document.getElementById('r-e').textContent=fmt(Math.round(eur/100)*100)+' € al año';
-  document.getElementById('r-m').textContent=meses?(meses+(meses===1?' mes':' meses')):'con estos números, no compensa';
 }
 calcular();
 var tCalc;

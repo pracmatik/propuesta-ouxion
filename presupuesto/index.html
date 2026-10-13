@@ -253,11 +253,11 @@ body{margin:0;background:var(--bg);color:var(--tit);font-family:'Montserrat',sys
   <div class="ctrl-in">
     <div class="ctrl-zona">
       <label for="zona">Zona de la obra</label>
-      <select id="zona" data-track="presupuesto-zona"><option value="1" selected>Barcelona · 1,00</option><option value="1.03">Girona · 1,03</option><option value="1.02">Tarragona · 1,02</option><option value="1.08">Madrid · 1,08</option><option value="0.98">Valencia · 0,98</option><option value="1.04">Málaga · 1,04</option><option value="1.15">Baleares · 1,15</option><option value="1.06">Lisboa · 1,06</option><option value="1.07">País Vasco · 1,07</option></select>
+      <select id="zona"><option value="1" selected>Barcelona · 1,00</option><option value="1.03">Girona · 1,03</option><option value="1.02">Tarragona · 1,02</option><option value="1.08">Madrid · 1,08</option><option value="0.98">Valencia · 0,98</option><option value="1.04">Málaga · 1,04</option><option value="1.15">Baleares · 1,15</option><option value="1.06">Lisboa · 1,06</option><option value="1.07">País Vasco · 1,07</option></select>
     </div>
     <div class="ctrl-ben">
       <label for="ben">Beneficio</label>
-      <div class="ben"><input id="ben" type="range" min="0" max="35" step="1" value="15" data-track="presupuesto-beneficio"><output id="ben-o" for="ben">15 %</output></div>
+      <div class="ben"><input id="ben" type="range" min="0" max="35" step="1" value="15" data-track="mueve el beneficio del presupuesto"><output id="ben-o" for="ben">15 %</output></div>
     </div>
     <div class="ctrl-nota"><b>Coeficientes de ejemplo.</b> Los pone Ouxion. Cambia la zona o el beneficio y se recalcula todo el presupuesto.</div>
     <div class="ctrl-total">
@@ -609,7 +609,7 @@ body{margin:0;background:var(--bg);color:var(--tit);font-family:'Montserrat',sys
   </article>
 </main>
 
-<div class="acciones"><a href="../">Volver a la propuesta</a> · <a href="#" id="imprimir" data-track="presupuesto-imprimir">Imprimir o guardar en PDF</a></div>
+<div class="acciones"><a href="../">Volver a la propuesta</a> · <a href="#" id="imprimir" data-track="imprimir el presupuesto">Imprimir o guardar en PDF</a></div>
 
 <script>
 (function () {
@@ -661,10 +661,8 @@ body{margin:0;background:var(--bg);color:var(--tit);font-family:'Montserrat',sys
   }
   zona.addEventListener('change', function () {
     recalcula();
-    if (window.oxTrack) window.oxTrack('presupuesto-zona', { zona: zona.options[zona.selectedIndex].text });
   });
   ben.addEventListener('input', recalcula);
-  ben.addEventListener('change', function () { if (window.oxTrack) window.oxTrack('presupuesto-beneficio', { pct: ben.value }); });
   document.getElementById('imprimir').addEventListener('click', function (e) { e.preventDefault(); window.print(); });
   recalcula();
 })();

@@ -388,7 +388,7 @@ calcular();
 var tCalc;
 document.getElementById('calc').addEventListener('input',function(){
   clearTimeout(tCalc);
-  tCalc=setTimeout(function(){ if(window.oxTrack) oxTrack('calculadora',{horas:document.getElementById('r-h').textContent}); },1500);
+  tCalc=setTimeout(function(){ if(window.oxTrack) oxTrack('Usa la calculadora: '+document.getElementById('r-h').textContent+' h'); },1500);
 });
 document.querySelectorAll('video[data-video]').forEach(function(v){
   v.addEventListener('loadedmetadata',function(){
@@ -397,7 +397,7 @@ document.querySelectorAll('video[data-video]').forEach(function(v){
   });
 });
 document.querySelectorAll('details').forEach(function(d){
-  d.addEventListener('toggle',function(){ if(d.open&&window.oxTrack) oxTrack('pregunta',{pregunta:d.querySelector('summary').textContent}); });
+  d.addEventListener('toggle',function(){ if(d.open&&window.oxTrack) oxTrack('Pregunta: '+d.querySelector('summary').textContent); });
 });
 </script>
 </body>
